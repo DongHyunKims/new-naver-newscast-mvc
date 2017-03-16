@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>news</title>
+
+
+<link rel="stylesheet" href="main.css">
+
+
+
+</head>
+<body>
+
+<div class="wrap">
+
+
+
+
+    <header>
+
+
+    </header>
+
+
+
+
+
+    <section class="mainArea" id="mainArea">
+
+        <div id="titleList">
+        </div>
+
+        <section class="content" id="newsContents">
+
+        </section>
+
+    </section>
+
+
+
+
+
+
+</div>
+
+
+<script src="./utility/utility.js"></script>
+
+
+
+<script src="./model/NewsModel.js"></script>
+<script src="./model/NewsModelList.js"></script>
+
+
+<script src="./view/MenuView.js"></script>
+<script src="./view/TitleListView.js"></script>
+<script src="./view/ContentsView.js"></script>
+<script src="./event/eventHandler.js"></script>
+
+<!--<script src="main.js"></script>-->
+<script src="main_mvc.js"></script>
+
+
+
+<!--<script type="text/x-handlebars-template" id="pageTemplate">-->
+
+<!--</script>-->
+
+
+<!-- menu template -->
+<script type="template" id="newsMenuTemplate">
+    <ul>
+        {{menuList}}
+    </ul>
+
+    <div class="btn">
+        <span class="paging"> {{currentPage}} / {{totalPage}} </span>
+        <div class="left"><a href="#"><</a></div>
+        <div class="right"><a href="#">></a></div>
+    </div>
+</script>
+
+
+
+<script type="template" id="newsTitleListTemplate">
+    <nav>
+        <ul id="titleUl">
+            {{newsList}}
+        </ul>
+    </nav>
+
+
+
+
+</script>
+
+
+<script type="template" id="newsTemplate">
+    <h4 class="title">
+        <hidden id={{newsKey}}></hidden>
+        <span class="newsName">{{title}}</span> <button><a href="#">X</a></button>
+    </h4>
+    <div class="newsList">
+        <img src={{imgurl}} alt="">
+        <ul>
+            {{newsList}}
+        </ul>
+    </div>
+</script>
+
+
+
+
+
+</body>
+</html>
