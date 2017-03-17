@@ -64,6 +64,7 @@ var NewsModelListPrototype = {
         });
         return pageObject;
     },
+    //해당 키에 맞는 news의 index를 가져오는 메소드
     getNewsIndex : function(newsKey){
         let index  = 0;
         for(let i = 0; i < this.newsModelList; i++){
@@ -76,6 +77,7 @@ var NewsModelListPrototype = {
 
         return index;
     },
+    //인자로 들어온 index에 상응하는 news의 키 값을 가져오는 함수
     getNewsKey : function(index){
         return this.newsModelList[index].newsKey;
     }

@@ -6,7 +6,7 @@
 
 (function() {
 
-
+    //ajax 콜백함수
     function reqListener() {
 
         let jsonDatas = JSON.parse(this.responseText);
@@ -27,7 +27,7 @@
 
 
 
-
+    //newsList를 만드는 함수
     function createNewsList(jsonDatas){
 
         NewsModelListProperty.newsModelList = jsonDatas.map(function(val,idx){
@@ -36,6 +36,7 @@
         return utility.makeObject(NewsModelListProperty,NewsModelListPrototype);
     }
 
+    //json데이터를 class로 바꾸어주는 함수
     function convertNewsObj(data,idx){
 
         for(let key in data){

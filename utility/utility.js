@@ -8,6 +8,7 @@ var utility = {
         $selector : function(selector){
             return document.querySelector(selector);
         },
+        //ajax 실행 메소드
         runAjax : function(reqListener, method, url){
             var oReq = new XMLHttpRequest();
             //reqListener 제일 마지막에 실행된다.
@@ -15,6 +16,7 @@ var utility = {
             oReq.open(method, url);
             oReq.send();
         },
+        //객체 생성 메소드
         makeObject : function (property, proto){
             //프로토 타입에 넣을 메소드를 모두 지정한다
             var obj = Object.create(proto);

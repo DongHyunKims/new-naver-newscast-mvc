@@ -2,7 +2,7 @@
  * Created by donghyunkim on 2017. 3. 17..
  */
 
-
+//이벤트 핸들 부분
 
 //리스트 클릭 핸들러
 function listClickHandler(newsModelList) {
@@ -14,6 +14,7 @@ function listClickHandler(newsModelList) {
     contentsView.renderContents(newsModelList, contentDom,key,removeNewsClickHandler);
 }
 
+//prev,next 버튼 클릭 핸들러
 function arrowClickHandler (newsModelList){
     let key = Number(utility.$selector("hidden").id);
     let page = newsModelList.selectPage(key);
@@ -44,6 +45,7 @@ function arrowClickHandler (newsModelList){
 
 }
 
+//구독취소버튼 클릭 핸들러
 function removeNewsClickHandler(newsModelList){
     let key = Number(utility.$selector("hidden").id);
 
@@ -71,7 +73,7 @@ function removeNewsClickHandler(newsModelList){
     contentsView.renderContents(newsModelList,contentDom,selectedKey,removeNewsClickHandler);
 }
 
-
+//글자색 강조 함수
 function highLight(key) {
     var dom = document.querySelectorAll("nav>ul>li");
     dom.forEach(function (value) {

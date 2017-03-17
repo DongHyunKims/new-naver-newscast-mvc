@@ -24,8 +24,6 @@ var MenuViewProtoType = {
         var mainTemplate = document.querySelector("#newsMenuTemplate").innerText;
         let pages = this.getPage(newsModelList,key);
 
-
-
         mainTemplate = mainTemplate.replace("{{currentPage}}", pages.currentPage);
         mainTemplate = mainTemplate.replace("{{totalPage}}", pages.totalPage);
         mainTemplate = mainTemplate.replace("{{menuList}}", this.menuList.map(function (val) {
@@ -36,8 +34,6 @@ var MenuViewProtoType = {
 
         let arrowBtnDom = document.querySelector(".btn");
         arrowBtnDom.addEventListener("click", arrowClickHandler.bind(this,newsModelList));
-
-
     },
     //title 리스트를 가져오는 메소드
     getPage : function(newsModelList,key){

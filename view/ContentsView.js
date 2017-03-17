@@ -21,8 +21,7 @@ var ContentsViewProtoType = {
             mainTemplate = mainTemplate.replace("{{newsList}}", contents.newslist.map(function (val) {
                 return "<li>" + val + "</li>"
             }).join(""));
-
-
+            
         contentsDom.innerHTML = mainTemplate;
         let buttonDom = utility.$selector("button");
             buttonDom.addEventListener("click", eventHandler.bind(this,newsModelList));
@@ -34,7 +33,6 @@ var ContentsViewProtoType = {
     getContents : function(newsModelList,key){
         return newsModelList.selectNews(key);
     },
-
     getContentsViewKey : function(){
         return this.contentsViewKey;
 

@@ -9,29 +9,19 @@ var TitleListViewProtoType = {
 
 
         let newsTitleListTemplate = utility.$selector('#newsTitleListTemplate').innerText;
-        // let template = Handlebars.compile(newsTitleListTemplate);
         let titleListData = this.getTitleList(newsModelList);
-
 
         newsTitleListTemplate = newsTitleListTemplate.replace("{{newsList}}", titleListData.map(function (val) {
             return "<li id="+ val.key +">" + val.title + "</li>"
         }).join(""));
 
-
         titleListDom.innerHTML = newsTitleListTemplate;
-
-
         let listUl = utility.$selector("#titleUl");
         listUl.addEventListener("click",eventHandler.bind(this,newsModelList))
 
-
-
-            if(highlight !== undefined && key !== undefined){
-                highlight(key);
-            }
-
-
-
+        if(highlight !== undefined && key !== undefined){
+            highlight(key);
+        }
     },
     //title 리스트를 가져오는 메소드
     getTitleList : function(newsModelList){
