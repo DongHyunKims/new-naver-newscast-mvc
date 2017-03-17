@@ -29,7 +29,7 @@ var NewsModelListPrototype = {
     //뉴스 구독 삭제 메소드
     deleteNews : function(newsKey){
         for (var i = 0; i < this.newsModelList.length; i++) {
-            if (this.newsModelList[i].newsKey === newsKey) {
+            if (this.newsModelList[i].getNewsKey() === newsKey) {
                 this.newsModelList.splice(i, 1);
                 break;
             }
@@ -68,7 +68,7 @@ var NewsModelListPrototype = {
     getNewsIndex : function(newsKey){
         let index  = 0;
         for(let i = 0; i < this.newsModelList; i++){
-            if(this.newsModelList[i].newsKey === newsKey){
+            if(this.newsModelList[i].getNewsKey() === newsKey){
                 index = i;
                 break;
             }
@@ -79,6 +79,6 @@ var NewsModelListPrototype = {
     },
     //인자로 들어온 index에 상응하는 news의 키 값을 가져오는 함수
     getNewsKey : function(index){
-        return this.newsModelList[index].newsKey;
+        return this.newsModelList[index].getNewsKey();
     }
 };

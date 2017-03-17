@@ -45,6 +45,9 @@ var MenuViewProtoType = {
     },
     setMenuViewKey : function(contentsViewKey){
         this.contentsViewKey = contentsViewKey;
+    },
+    addMenu : function(menu){
+        this.menuList.push(menu);
     }
 
 };

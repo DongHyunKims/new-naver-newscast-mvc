@@ -46,7 +46,6 @@ var ContentsViewProtoType = {
 var ContentsViewProperty = {
     contentsViewKey : 0,
 };
-
 var contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
 
 

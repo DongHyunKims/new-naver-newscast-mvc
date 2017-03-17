@@ -20,7 +20,6 @@ function arrowClickHandler (newsModelList){
     let page = newsModelList.selectPage(key);
     let currentSite = page.currentPage;
     let totalpage = page.totalPage;
-
     if (event.target.parentElement.className == "left") {
 
         if (currentSite > 1) {
