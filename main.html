@@ -5,12 +5,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>news</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
 
-
-<link rel="stylesheet" href="main.css">
-
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -24,10 +23,7 @@
 
     </header>
 
-
-
     <section class="mainArea" id="mainArea">
-
         <div id="titleList">
         </div>
 
@@ -35,12 +31,19 @@
 
         </section>
 
-    </section>
 
-    <section class="sideArea">
 
     </section>
 
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                Subscribe <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu" id="subscribeBtn">
+                <li class="addSubscribe"><a href="#">구독추가</a></li>
+                <li class="listSubscribe"><a href="#">구독목록</a></li>
+            </ul>
+        </div>
 
 
 </div>
@@ -53,7 +56,7 @@
 <script src="./model/NewsModel.js"></script>
 <script src="./model/NewsModelList.js"></script>
 
-
+<script src="./view/ContentsSubscribeView.js"></script>
 <script src="./view/MenuView.js"></script>
 <script src="./view/TitleListView.js"></script>
 <script src="./view/ContentsView.js"></script>
@@ -73,7 +76,6 @@
     <ul>
         {{dataList}}
     </ul>
-
     <div class="btn">
         <span class="paging"> {{currentPage}} / {{totalPage}} </span>
         <div class="left"><a href="#"><</a></div>
@@ -102,6 +104,13 @@
         <ul>
             {{dataList}}
         </ul>
+    </div>
+</script>
+
+
+<script type="template" class="subscribeTemplate">
+    <div class="row subscribeBtn">
+        {{subscribeList}}
     </div>
 </script>
 

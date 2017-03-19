@@ -7,7 +7,8 @@ var NewsProperty = {
     title : "",
     newslist : [],
     imgurl : "",
-    subState : 0
+    subState : 0,
+    titleimgurl : "",
 };
 
 
@@ -27,6 +28,9 @@ var NewsModelPrototype = {
     getSubState : function(){
         return this.subState;
     },
+    getTitleImgurl : function(){
+        return this.titleimgurl;
+    },
     setNewsKey : function(newsKey){
         this.newsKey = newsKey;
     },
@@ -42,5 +46,9 @@ var NewsModelPrototype = {
     setSubState : function(subState){
         this.subState = subState;
     },
+    setTitleImgurl : function(titleimgurl){
+        this.titleimgurl = titleimgurl;
+    },
+
 };
 

@@ -96,3 +96,11 @@ nav {
     white-space: nowrap;
     font-size: 12px;
 }
+#mainArea{
+    border: 1px solid #cccaca;
+}
+
+#mainArea div div div{
+    border: 1px solid #cccaca;
+    text-align: center;
+}

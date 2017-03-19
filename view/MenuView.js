@@ -12,7 +12,7 @@
 
 var MenuViewProperty = {
     menuViewKey : 0,
-    menuList : ["전체언론사","My news"],
+    menuList : ["전체언론사 > ","My news"],
     contentsList : [],
     renderingViews : [],
     current: 0,

@@ -11,6 +11,7 @@
     let titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
     let menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
     let contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
+    let contentsSubscribeView = utility.makeObject(ContentsSubscribeViewPrototype,ContentsSubscribeViewProperty);
 
     //ajax 콜백함수
     function reqListener() {
@@ -18,7 +19,27 @@
         let jsonDatas = JSON.parse(this.responseText);
         let newsListObj = createNewsList(jsonDatas);
         let contentList = newsListObj.getNewsModelList();
+        let subscribeList = [];
 
+       // listPage(contentList);
+        addPage(contentList,subscribeList);
+
+        let subscribeBtn = utility.$selector("#subscribeBtn");
+        subscribeBtn.addEventListener("click",subscribeClickHandler.bind(null,contentList));
+
+
+    }
+
+
+    function subscribeClickHandler(contentList){
+        if(event.target.className === "addSubscribe"){
+
+        }else{
+            listPage(contentList);
+        }
+    }
+
+    function listPage(contentList){
         //렌더링 할 dom
         let headerDom = utility.$selector("header");
         let titleListDom = utility.$selector("#titleList");
@@ -44,6 +65,21 @@
         contentsView.setContentsList(contentList);
         contentsView.setCurrent(0);
         contentsView.render(contentDom);
+    }
+
+
+    function addPage(contentList,subscribeList){
+        //렌더링 할 dom
+        let mainAreaDom = utility.$selector("#mainArea");
+
+
+        //
+        // let content = {viewObj : contentsView, domObj: contentDom};
+        // let menu = {viewObj: menuView, domObj:headerDom};
+        // let title = {viewObj: titleListView, domObj: titleListDom};
+        contentsSubscribeView.setContentsList(contentList);
+        contentsSubscribeView.setSubscribeContentsList(subscribeList);
+        contentsSubscribeView.render(mainAreaDom);
 
     }
 

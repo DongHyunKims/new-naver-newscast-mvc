@@ -22,8 +22,6 @@ var TitleListViewProtoType = {
         }).join(""));
 
         renderingDom.innerHTML = newsTitleListTemplate;
-
-
         let listUl = utility.$selector(".titleUl");
         //바인드를 apply사용하는 법
         listUl.addEventListener("click",this.listClickHandler.bind(this,this.renderingViews,this.current));
