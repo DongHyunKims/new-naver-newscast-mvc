@@ -113,7 +113,7 @@ var MenuViewProtoType = {
         // if (argArr[argArr.length - 2] !== event) {
         //     argArr[argArr.length - 2](selectedKey);
         // }
-    }
+    },
 
 };
 

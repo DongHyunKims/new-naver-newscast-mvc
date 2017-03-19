@@ -32,6 +32,7 @@ var TitleListViewProtoType = {
         let listUl = utility.$selector(".titleUl");
         //바인드를 apply사용하는 법
         listUl.addEventListener("click",this.listClickHandler.bind(this,this.renderingViews,this.current));
+        this.highLight();
 
     },
     getTitleListViewKey : function(){
@@ -86,6 +87,14 @@ var TitleListViewProtoType = {
         // if(argArr[argArr.length-2] !== event) {
         //     argArr[argArr.length-2](key);
         // }
+    },
+    //글자색 강조 함수
+    highLight : function() {
+        let dom = document.querySelectorAll(".titleListNav>ul>li");
+        dom.forEach(function (value) {
+            value.style.color = "black";
+        });
+        utility.$selector("nav>ul>.\\3"+this.current).style.color = "blue";
     }
 };
 

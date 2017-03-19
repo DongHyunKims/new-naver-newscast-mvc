@@ -9,7 +9,6 @@
 (function() {
 
     let titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
-    //let titleListView2 = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
     let menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
     let contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
 
@@ -17,7 +16,6 @@
     function reqListener() {
 
         let jsonDatas = JSON.parse(this.responseText);
-        //console.log(jsonDatas);
         let newsListObj = createNewsList(jsonDatas);
         let contentList = newsListObj.getNewsModelList();
 
@@ -27,19 +25,17 @@
         let contentDom = utility.$selector("#newsContents");
 
 
-        //let sideDom = utility.$selector(".sideArea");
-
         let content = {viewObj : contentsView, domObj: contentDom};
         let menu = {viewObj: menuView, domObj:headerDom};
         let title = {viewObj: titleListView, domObj: titleListDom};
 
-        menuView.setRenderingViews([content,menu]);
+        menuView.setRenderingViews([content,menu,title]);
         menuView.setContentsList(contentList);
         menuView.setCurrent(0);
         menuView.render(headerDom);
 
 
-        titleListView.setRenderingViews([menu,content]);
+        titleListView.setRenderingViews([menu,content,title]);
         titleListView.setContentsList(contentList);
         titleListView.setCurrent(0);
         titleListView.render(titleListDom);
@@ -49,12 +45,7 @@
         contentsView.setCurrent(0);
         contentsView.render(contentDom);
 
-
-
     }
-
-
-
 
     //newsList를 만드는 함수
     function createNewsList(jsonDatas){
