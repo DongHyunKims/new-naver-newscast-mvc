@@ -8,7 +8,7 @@ header,.mainArea > div > nav, .mainArea > .content, .newsList > ul{
 }
 
 .wrap{
-    width:800px;
+    width:802px;
     margin: 150px auto 0px;
 }
 
@@ -100,7 +100,7 @@ nav {
     border: 1px solid #cccaca;
 }
 
-#mainArea div div div{
+#mainArea .row .row .col-sm-3{
     border: 1px solid #cccaca;
     text-align: center;
 }

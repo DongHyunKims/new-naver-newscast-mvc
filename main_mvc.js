@@ -20,26 +20,23 @@
         let newsListObj = createNewsList(jsonDatas);
         let contentList = newsListObj.getNewsModelList();
         let subscribeList = [];
-
        // listPage(contentList);
         addPage(contentList,subscribeList);
-
+        //listPage(subscribeList);
         let subscribeBtn = utility.$selector("#subscribeBtn");
-        subscribeBtn.addEventListener("click",subscribeClickHandler.bind(null,contentList));
-
-
+        subscribeBtn.addEventListener("click",subscribeClickHandler.bind(null,contentList,subscribeList));
     }
 
-
-    function subscribeClickHandler(contentList){
+    function subscribeClickHandler(contentList,subscribeList){
         if(event.target.className === "addSubscribe"){
-
+            addPage(contentList,subscribeList);
         }else{
-            listPage(contentList);
+            utility.$selector("#mainArea").innerHTML = "<div id='titleList'> </div> <section class='content' id='newsContents'> </section>";
+            listPage(subscribeList,contentList);
         }
     }
 
-    function listPage(contentList){
+    function listPage(contentList,subscribeList){
         //렌더링 할 dom
         let headerDom = utility.$selector("header");
         let titleListDom = utility.$selector("#titleList");
@@ -53,8 +50,8 @@
         menuView.setRenderingViews([content,menu,title]);
         menuView.setContentsList(contentList);
         menuView.setCurrent(0);
+        menuView.setState(0);
         menuView.render(headerDom);
-
 
         titleListView.setRenderingViews([menu,content,title]);
         titleListView.setContentsList(contentList);
@@ -62,6 +59,7 @@
         titleListView.render(titleListDom);
 
         contentsView.setRenderingViews([content,menu,title]);
+        contentsView.setCancelSubList(subscribeList);
         contentsView.setContentsList(contentList);
         contentsView.setCurrent(0);
         contentsView.render(contentDom);
@@ -71,12 +69,13 @@
     function addPage(contentList,subscribeList){
         //렌더링 할 dom
         let mainAreaDom = utility.$selector("#mainArea");
+        let headerDom = utility.$selector("header");
 
+        menuView.setContentsList(contentList);
+        menuView.setCurrent(0);
+        menuView.setState(1);
+        menuView.render(headerDom);
 
-        //
-        // let content = {viewObj : contentsView, domObj: contentDom};
-        // let menu = {viewObj: menuView, domObj:headerDom};
-        // let title = {viewObj: titleListView, domObj: titleListDom};
         contentsSubscribeView.setContentsList(contentList);
         contentsSubscribeView.setSubscribeContentsList(subscribeList);
         contentsSubscribeView.render(mainAreaDom);

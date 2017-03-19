@@ -16,7 +16,9 @@ var MenuViewProperty = {
     contentsList : [],
     renderingViews : [],
     current: 0,
-    total: 0
+    total: 0,
+    cancelSubList : [],
+    state : 0
 };
 
 var MenuViewProtoType = {
@@ -29,14 +31,22 @@ var MenuViewProtoType = {
 
         mainTemplate = mainTemplate.replace("{{currentPage}}", currentPage);
         mainTemplate = mainTemplate.replace("{{totalPage}}", this.total);
+
         mainTemplate = mainTemplate.replace("{{dataList}}", this.menuList.map(function (val) {
             return "<li>" + val + "</li>"
         }).join(""));
 
         renderingDom.innerHTML = mainTemplate;
 
-        let arrowBtnDom = document.querySelector(".btn");
-        arrowBtnDom.addEventListener("click", this.arrowClickHandler.bind(this,this.renderingViews,currentPage, this.total));
+        if(this.state === 1) {
+            utility.$selector(".btn").innerHTML = "";
+
+        }else{
+            let arrowBtnDom = document.querySelector(".btn");
+            arrowBtnDom.addEventListener("click", this.arrowClickHandler.bind(this,this.renderingViews,currentPage, this.total));
+        }
+
+
 
     },
     getMenuViewKey : function(){
@@ -67,6 +77,12 @@ var MenuViewProtoType = {
     setContentsList: function(contentsList){
         this.contentsList = contentsList;
     },
+    getCancelSubList : function(){
+        return this.cancelSubList;
+    },
+    setCancelSubList: function(cancelSubList){
+        this.cancelSubList = cancelSubList;
+    },
     getCurrent : function(){
         return this.current;
     },
@@ -78,6 +94,12 @@ var MenuViewProtoType = {
     },
     setTotal: function(total){
         this.total = total;
+    },
+    getState : function(){
+        return this.state;
+    },
+    setState : function(state){
+        this.state = state;
     },
     //prev,next 버튼 클릭 핸들러
     arrowClickHandler : function(renderingViews,currentPage,total) {
@@ -103,15 +125,11 @@ var MenuViewProtoType = {
             viewObj.setCurrent(currentPage-1);
             viewObj.render(domObj);
         }
-        // if (argArr[argArr.length - 2] !== event) {
-        //     argArr[argArr.length - 2](selectedKey);
-        // }
     },
 
 };
 
 
-//var menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
 
 
 

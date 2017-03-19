@@ -6,7 +6,6 @@
  */
 
 var ContentsViewProtoType = {
-
     //contents를 렌더링하는 메소드
     render : function(renderingDom){
 
@@ -27,7 +26,14 @@ var ContentsViewProtoType = {
         renderingDom.innerHTML = mainTemplate;
 
         let buttonDom = utility.$selector("button");
-        buttonDom.addEventListener("click", this.removeNewsClickHandler.bind(this,this.renderingViews,this.current));
+        let handler = {};
+
+        if(this.state === 0){
+            handler = this.cancelClickHandler;
+        }else{
+            handler = this.removeClickHandler;
+        }
+        buttonDom.addEventListener("click", handler.bind(this,this.renderingViews,this.current));
         }
     },
     getContentsViewKey : function(){
@@ -48,6 +54,12 @@ var ContentsViewProtoType = {
     setContentsList: function(contentsList){
         this.contentsList = contentsList;
     },
+    getCancelSubList : function(){
+        return this.cancelSubList;
+    },
+    setCancelSubList: function(cancelSubList){
+        this.cancelSubList = cancelSubList;
+    },
     getRenderingViews : function(){
         return this.renderingViews;
     },
@@ -60,28 +72,48 @@ var ContentsViewProtoType = {
     setCurrent : function(current){
         this.current = current;
     },
+    getState : function(){
+        return this.state;
+    },
+    setState : function(state){
+        this.state = state;
+    },
     createContent : function(){
         this.contentData = this.contentsList[this.current];
     },
     removeContent : function(){
         this.contentsList.splice(this.current, 1);
     },
+    cancelContent : function(){
+        this.cancelSubList.push(this.contentsList[this.current]);
+        this.contentsList.splice(this.current, 1);
+    },
+    //데이터 삭제버튼 클릭 핸들러
+    removeClickHandler :  function (renderingViews,current){
+        this.removeContent();
 
-    //구독취소버튼 클릭 핸들러
-    removeNewsClickHandler :  function (renderingViews,current){
-    this.removeContent(current);
+        current = 0;
 
-    current = 0;
+        for (let i = 0; i < renderingViews.length; i++) {
+            let viewObj = renderingViews[i].viewObj;
+            let domObj = renderingViews[i].domObj;
+            viewObj.setCurrent(current);
+            viewObj.render(domObj);
+        }
+    },
+    //구독취소 클릭 핸들러
+    cancelClickHandler :  function (renderingViews,current){
+        this.cancelContent();
 
-    for (let i = 0; i < renderingViews.length; i++) {
-        let viewObj = renderingViews[i].viewObj;
-        let domObj = renderingViews[i].domObj;
-        viewObj.setCurrent(current);
-        viewObj.render(domObj);
+        current = 0;
+
+        for (let i = 0; i < renderingViews.length; i++) {
+            let viewObj = renderingViews[i].viewObj;
+            let domObj = renderingViews[i].domObj;
+            viewObj.setCurrent(current);
+            viewObj.render(domObj);
+        }
     }
-
-    }
-
 };
 
 var ContentsViewProperty = {
@@ -90,6 +122,8 @@ var ContentsViewProperty = {
     contentsList : [],
     renderingViews : [],
     current: 0,
+    cancelSubList : [],
+    state : 0
 };
 
 //var contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);

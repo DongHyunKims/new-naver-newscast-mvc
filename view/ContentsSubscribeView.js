@@ -35,16 +35,13 @@ var ContentsSubscribeViewPrototype = {
                 }
                 divHtml = "<div class='col-sm-3 {{idx}}' > <img class={{idx}} src={{titleimgurl}} alt='' width='70' height='60'> </div>";
             }
-
             mainTemplate = mainTemplate.replace("{{subscribeList}}", resultHtml);
             renderingDom.innerHTML = mainTemplate;
+            let subscribeBtn = utility.$selector(".subscribeBtn");
+            subscribeBtn.addEventListener("click",this.subscribeMouseoverHandler.bind(this,renderingDom));
         }
 
 
-       let subscribeBtn = utility.$selector(".subscribeBtn");
-        subscribeBtn.addEventListener("mouseover",this.subscribeMouseoverHandler.bind(this));
-
-        subscribeBtn.addEventListener("mouseout",this.subscribeMouseoutHandler.bind(this));
 
 
     },
@@ -90,24 +87,17 @@ var ContentsSubscribeViewPrototype = {
     removeContent : function(){
         this.contentsList.splice(this.current, 1);
     },
-    subscribeMouseoverHandler : function(){
+    subscribeMouseoverHandler : function(renderingDom){
 
         let element = event.target;
 
-
         if(element.tagName == "IMG"){
-            this.imgElement = element;
-            element.parentNode.innerHTML = "<button class='btn btn-primary " + element.className + "' style='height:60px; width:70px;'>구독</button>";
+            let idx = element.className;
+            console.log(this);
+            this.subscribeContentsList.push(this.contentsList[idx]);
+            this.contentsList.splice(idx,1);
+            this.render(renderingDom);
         }
-
-        let subBtn = element;
-        let idx = subBtn.classList[2];
-        console.log(subBtn);
-
-        subBtn.addEventListener("click",function(){
-            console.log("dd");
-        })
-
 
 
     },
@@ -128,7 +118,6 @@ var ContentsSubscribeViewProperty = {
     contentsList : [],
     renderingViews : [],
     current: 0,
-    imgElement: {},
     subscribeContentsList: []
 };
 

@@ -8,6 +8,7 @@ var TitleListViewProperty = {
     renderingViews : [],
     contentsList : [],
     current : 0,
+    cancelSubList : []
 };
 
 //모델리스트, 랜더링할 돔, 영향을 줄 dom, view, 핸들러
@@ -51,6 +52,12 @@ var TitleListViewProtoType = {
     },
     setContentsList: function(contentsList){
         this.contentsList = contentsList;
+    },
+    getCancelSubList : function(){
+        return this.cancelSubList;
+    },
+    setCancelSubList: function(cancelSubList){
+        this.cancelSubList = cancelSubList;
     },
     getCurrent : function(){
         return this.current;
