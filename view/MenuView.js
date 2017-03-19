@@ -46,8 +46,6 @@ var MenuViewProtoType = {
             arrowBtnDom.addEventListener("click", this.arrowClickHandler.bind(this,this.renderingViews,currentPage, this.total));
         }
 
-
-
     },
     getMenuViewKey : function(){
         return this.contentsViewKey;

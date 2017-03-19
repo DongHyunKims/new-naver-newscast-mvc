@@ -24,10 +24,8 @@ var TitleListViewProtoType = {
 
         renderingDom.innerHTML = newsTitleListTemplate;
         let listUl = utility.$selector(".titleUl");
-        //바인드를 apply사용하는 법
         listUl.addEventListener("click",this.listClickHandler.bind(this,this.renderingViews,this.current));
         this.highLight();
-
     },
     getTitleListViewKey : function(){
         return this.titleListViewKey;
@@ -71,6 +69,7 @@ var TitleListViewProtoType = {
             this.titleListData.push(val.title);
         });
     },
+    //title 리스트 클릭 핸들러
     listClickHandler : function (renderingViews,current) {
         current =  Number(event.target.className);
         for(let i = 0; i < renderingViews.length; i++){

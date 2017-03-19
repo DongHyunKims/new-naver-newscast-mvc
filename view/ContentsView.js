@@ -28,9 +28,13 @@ var ContentsViewProtoType = {
         let buttonDom = utility.$selector("button");
         let handler = {};
 
+
+        //state가 0 이면 구독 취소시 데이터를 구독예정 리스트에 저장해 놓는 cancelClickHandler를 실행 시킴
         if(this.state === 0){
             handler = this.cancelClickHandler;
-        }else{
+        }
+        //state가 1 이면 구독 취소시 데이터를 바로 삭제하는 removeClickHandler를 실행시킴
+        else{
             handler = this.removeClickHandler;
         }
         buttonDom.addEventListener("click", handler.bind(this,this.renderingViews,this.current));
@@ -88,12 +92,10 @@ var ContentsViewProtoType = {
         this.cancelSubList.push(this.contentsList[this.current]);
         this.contentsList.splice(this.current, 1);
     },
-    //데이터 삭제버튼 클릭 핸들러
+    //데이터 삭제 핸들러
     removeClickHandler :  function (renderingViews,current){
         this.removeContent();
-
         current = 0;
-
         for (let i = 0; i < renderingViews.length; i++) {
             let viewObj = renderingViews[i].viewObj;
             let domObj = renderingViews[i].domObj;
@@ -101,7 +103,7 @@ var ContentsViewProtoType = {
             viewObj.render(domObj);
         }
     },
-    //구독취소 클릭 핸들러
+    //구독취소 핸들러
     cancelClickHandler :  function (renderingViews,current){
         this.cancelContent();
 

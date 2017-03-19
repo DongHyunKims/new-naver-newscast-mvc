@@ -18,31 +18,35 @@
 
         let jsonDatas = JSON.parse(this.responseText);
         let newsListObj = createNewsList(jsonDatas);
+        //구독되지 않은 정보리스트
         let contentList = newsListObj.getNewsModelList();
+        //구독 된 정보리스트
         let subscribeList = [];
-       // listPage(contentList);
-        addPage(contentList,subscribeList);
-        //listPage(subscribeList);
+
+        subscribePage(contentList,subscribeList);
+
         let subscribeBtn = utility.$selector("#subscribeBtn");
         subscribeBtn.addEventListener("click",subscribeClickHandler.bind(null,contentList,subscribeList));
     }
 
+    // 구독 밑 구독 한 목록에 대한 이벤트핸들러
     function subscribeClickHandler(contentList,subscribeList){
         if(event.target.className === "addSubscribe"){
-            addPage(contentList,subscribeList);
+            subscribePage(contentList,subscribeList);
         }else{
             utility.$selector("#mainArea").innerHTML = "<div id='titleList'> </div> <section class='content' id='newsContents'> </section>";
-            listPage(subscribeList,contentList);
+            newsStandPage(subscribeList,contentList);
         }
     }
 
-    function listPage(contentList,subscribeList){
+    //뉴스스텐트 페이지 로딩
+    function newsStandPage(contentList,subscribeList){
         //렌더링 할 dom
         let headerDom = utility.$selector("header");
         let titleListDom = utility.$selector("#titleList");
         let contentDom = utility.$selector("#newsContents");
 
-
+        //영향을 받는 view를 {viewObj : contentsView, domObj: contentDom}; 같은 형식으로 지정하여 배열로 넣어주면 자동으로 영향을 받는 뷰들이 렌더링 된다
         let content = {viewObj : contentsView, domObj: contentDom};
         let menu = {viewObj: menuView, domObj:headerDom};
         let title = {viewObj: titleListView, domObj: titleListDom};
@@ -65,8 +69,8 @@
         contentsView.render(contentDom);
     }
 
-
-    function addPage(contentList,subscribeList){
+    // 구독 목록 페이지 로딩
+    function subscribePage(contentList,subscribeList){
         //렌더링 할 dom
         let mainAreaDom = utility.$selector("#mainArea");
         let headerDom = utility.$selector("header");

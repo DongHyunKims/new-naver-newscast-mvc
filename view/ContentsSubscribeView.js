@@ -38,10 +38,8 @@ var ContentsSubscribeViewPrototype = {
             mainTemplate = mainTemplate.replace("{{subscribeList}}", resultHtml);
             renderingDom.innerHTML = mainTemplate;
             let subscribeBtn = utility.$selector(".subscribeBtn");
-            subscribeBtn.addEventListener("click",this.subscribeMouseoverHandler.bind(this,renderingDom));
+            subscribeBtn.addEventListener("click",this.subscribeClickHandler.bind(this,renderingDom));
         }
-
-
 
 
     },
@@ -87,7 +85,9 @@ var ContentsSubscribeViewPrototype = {
     removeContent : function(){
         this.contentsList.splice(this.current, 1);
     },
-    subscribeMouseoverHandler : function(renderingDom){
+
+    //이미지 클릭시 구독 할수 있는 이벤트 핸들러
+    subscribeClickHandler : function(renderingDom){
 
         let element = event.target;
 
