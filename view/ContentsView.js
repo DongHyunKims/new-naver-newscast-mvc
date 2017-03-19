@@ -10,17 +10,17 @@ var ContentsViewProtoType = {
     //contents를 렌더링하는 메소드
     render : function(renderingDom){
 
-        let mainTemplate = utility.$selector("#newsTemplate").innerText;
+        let mainTemplate = utility.$selector(".contentTemplate").innerText;
         this.createContent();
         let contentData = this.contentData;
 
         if(contentData===undefined) {
             renderingDom.innerHTML =  "";
         }else {
-            mainTemplate = mainTemplate.replace("{{newsKey}}", this.current);
+            mainTemplate = mainTemplate.replace("{{idx}}", this.current);
             mainTemplate = mainTemplate.replace("{{title}}", contentData.title);
             mainTemplate = mainTemplate.replace("{{imgurl}}", contentData.imgurl);
-            mainTemplate = mainTemplate.replace("{{newsList}}", contentData.newslist.map(function (val) {
+            mainTemplate = mainTemplate.replace("{{dataList}}", contentData.newslist.map(function (val) {
                 return "<li>" + val + "</li>"
         }).join(""));
 
@@ -74,9 +74,6 @@ var ContentsViewProtoType = {
     current = 0;
 
     for (let i = 0; i < renderingViews.length; i++) {
-        // if (Object.prototype.toString.call(renderingViews[i]) !== "[object Object]") {
-        //     break;
-        // }
         let viewObj = renderingViews[i].viewObj;
         let domObj = renderingViews[i].domObj;
         viewObj.setCurrent(current);
@@ -86,8 +83,6 @@ var ContentsViewProtoType = {
     }
 
 };
-
-
 
 var ContentsViewProperty = {
     contentsViewKey : 0,

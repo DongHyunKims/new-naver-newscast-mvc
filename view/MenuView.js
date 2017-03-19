@@ -25,23 +25,16 @@ var MenuViewProtoType = {
     render : function(renderingDom){
         this.total = this.contentsList.length;
         let currentPage = this.total === 0 ? 0 : this.current+1;
-        let mainTemplate = document.querySelector("#newsMenuTemplate").innerText;
+        let mainTemplate = document.querySelector(".menuTemplate").innerText;
 
         mainTemplate = mainTemplate.replace("{{currentPage}}", currentPage);
         mainTemplate = mainTemplate.replace("{{totalPage}}", this.total);
-        mainTemplate = mainTemplate.replace("{{menuList}}", this.menuList.map(function (val) {
+        mainTemplate = mainTemplate.replace("{{dataList}}", this.menuList.map(function (val) {
             return "<li>" + val + "</li>"
         }).join(""));
 
         renderingDom.innerHTML = mainTemplate;
 
-        // let highlight;
-        // let key;
-        // if(argArr[argArr.length-2] !== undefined && argArr[argArr.length-1] !== undefined){
-        //     highlight = argArr[argArr.length-2];
-        //     key = argArr[argArr.length-1];
-        //     highlight(key);
-        // }
         let arrowBtnDom = document.querySelector(".btn");
         arrowBtnDom.addEventListener("click", this.arrowClickHandler.bind(this,this.renderingViews,currentPage, this.total));
 

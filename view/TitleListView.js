@@ -16,19 +16,14 @@ var TitleListViewProtoType = {
     //titleView를 렌더링하는 메소드
     render : function(renderingDom){
         this.createTitleList();
-        let newsTitleListTemplate = utility.$selector('#newsTitleListTemplate').innerText;
-        newsTitleListTemplate = newsTitleListTemplate.replace("{{newsList}}", this.titleListData.map(function (title,idx) {
+        let newsTitleListTemplate = utility.$selector(".titleListTemplate").innerText;
+        newsTitleListTemplate = newsTitleListTemplate.replace("{{dataList}}", this.titleListData.map(function (title,idx) {
             return "<li class="+ idx +">" + title + "</li>"
         }).join(""));
 
         renderingDom.innerHTML = newsTitleListTemplate;
-        // let highlight;
-        // let key;
-        // if(argArr[argArr.length-2] !== undefined && argArr[argArr.length-1] !== undefined){
-        //     highlight = argArr[argArr.length-2];
-        //     key = argArr[argArr.length-1];
-        //     highlight(key);
-        // }
+
+
         let listUl = utility.$selector(".titleUl");
         //바인드를 apply사용하는 법
         listUl.addEventListener("click",this.listClickHandler.bind(this,this.renderingViews,this.current));
@@ -73,20 +68,12 @@ var TitleListViewProtoType = {
     },
     listClickHandler : function (renderingViews,current) {
         current =  Number(event.target.className);
-        //let renderingViews = this.renderingViews;
         for(let i = 0; i < renderingViews.length; i++){
-            // if(Object.prototype.toString.call(renderingViews[i]) !== "[object Object]"){
-            //     break;
-            // }
-
             let viewObj =  renderingViews[i].viewObj;
             let domObj = renderingViews[i].domObj;
             viewObj.setCurrent(current);
             viewObj.render(domObj);
         }
-        // if(argArr[argArr.length-2] !== event) {
-        //     argArr[argArr.length-2](key);
-        // }
     },
     //글자색 강조 함수
     highLight : function() {

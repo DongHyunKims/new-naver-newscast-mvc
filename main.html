@@ -37,10 +37,6 @@
 
     </section>
 
-
-
-
-
     <section class="sideArea">
 
     </section>
@@ -73,9 +69,9 @@
 
 
 <!-- menu template -->
-<script type="template" id="newsMenuTemplate">
+<script type="template" class="menuTemplate">
     <ul>
-        {{menuList}}
+        {{dataList}}
     </ul>
 
     <div class="btn">
@@ -87,24 +83,24 @@
 
 
 
-<script type="template" id="newsTitleListTemplate">
+<script type="template" class="titleListTemplate">
     <nav class="titleListNav">
         <ul class="titleUl">
-            {{newsList}}
+            {{dataList}}
         </ul>
     </nav>
 </script>
 
 
-<script type="template" id="newsTemplate">
+<script type="template" class="contentTemplate">
     <h4 class="title">
-        <hidden class={{newsKey}}></hidden>
+        <hidden class={{idx}}></hidden>
         <span class="newsName">{{title}}</span> <button><a href="#">X</a></button>
     </h4>
     <div class="newsList">
         <img src={{imgurl}} alt="">
         <ul>
-            {{newsList}}
+            {{dataList}}
         </ul>
     </div>
 </script>
