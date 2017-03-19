@@ -8,7 +8,7 @@
 var ContentsViewProtoType = {
 
     //contents를 렌더링하는 메소드
-    renderContents : function(newsModelList,contentsDom,key,eventHandler){
+    render : function(newsModelList,contentsDom,key,eventHandler){
 
         var mainTemplate = utility.$selector("#newsTemplate").innerText;
         let contents = this.getContents(newsModelList,key);
@@ -31,6 +31,7 @@ var ContentsViewProtoType = {
     },
     //title 리스트를 가져오는 메소드
     getContents : function(newsModelList,key){
+
         return newsModelList.selectNews(key);
     },
     getContentsViewKey : function(){
@@ -46,6 +47,7 @@ var ContentsViewProtoType = {
 var ContentsViewProperty = {
     contentsViewKey : 0,
 };
+
 var contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
 
 

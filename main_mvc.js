@@ -6,6 +6,11 @@
 
 (function() {
 
+    let titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
+    //let titleListView2 = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
+    let menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
+    let contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
+
     //ajax 콜백함수
     function reqListener() {
 
@@ -17,10 +22,22 @@
         //렌더링 부분
         let titleListDom = utility.$selector("#titleList");
         let contentDom = utility.$selector("#newsContents");
+        let sideDom = utility.$selector(".sideArea");
 
-        menuView.renderMenu(newsListObj,headerDom,0,arrowClickHandler);
-        titleListView.renderTitleList(newsListObj,titleListDom,listClickHandler,highLight,0);
-        contentsView.renderContents(newsListObj,contentDom,0,removeNewsClickHandler);
+        menuView.render(newsListObj,headerDom,0,arrowClickHandler);
+
+        let content = {viewObj : contentsView, domObj: contentDom,handlerFn : removeNewsClickHandler};
+        let menu = {viewObj: menuView,domObj:headerDom, handlerFn: arrowClickHandler};
+
+
+        titleListView.render(titleListDom,newsListObj,content,menu,highLight,0);
+
+
+        //titleListView2.render(sideDom,newsListObj,content,menu,highLight,0);
+
+
+        contentsView.render(newsListObj,contentDom,0,removeNewsClickHandler);
+
 
     }
 
@@ -29,7 +46,6 @@
 
     //newsList를 만드는 함수
     function createNewsList(jsonDatas){
-
         NewsModelListProperty.newsModelList = jsonDatas.map(function(val,idx){
             return utility.makeObject(convertNewsObj(val,idx),NewsModelPrototype);
         });
@@ -38,18 +54,12 @@
 
     //json데이터를 class로 바꾸어주는 함수
     function convertNewsObj(data,idx){
-
         for(let key in data){
             NewsProperty[key] = data[key]
         }
-
         NewsProperty.newsKey = idx;
         return utility.makeObject(NewsProperty,NewsModelPrototype);
-
     }
-
-
-
 
     document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET","./data/newslist.json"));
 

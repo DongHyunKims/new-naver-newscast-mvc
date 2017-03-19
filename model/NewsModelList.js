@@ -74,7 +74,6 @@ var NewsModelListPrototype = {
             }
 
         }
-
         return index;
     },
     //인자로 들어온 index에 상응하는 news의 키 값을 가져오는 함수

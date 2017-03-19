@@ -19,7 +19,7 @@ var MenuViewProperty = {
 var MenuViewProtoType = {
 
     //menu rendering 메소드
-    renderMenu : function(newsModelList,headerDom,key){
+    render : function(newsModelList,headerDom,key){
 
         var mainTemplate = document.querySelector("#newsMenuTemplate").innerText;
         let pages = this.getPage(newsModelList,key);
