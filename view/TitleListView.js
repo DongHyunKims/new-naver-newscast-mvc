@@ -2,44 +2,37 @@
  * Created by donghyunkim on 2017. 3. 16..
  */
 
-
-
-
+var TitleListViewProperty = {
+    titleListViewKey : 0,
+    titleListData: [],
+    renderingViews : [],
+    contentsList : [],
+    current : 0,
+};
 
 //모델리스트, 랜더링할 돔, 영향을 줄 dom, view, 핸들러
 var TitleListViewProtoType = {
 
     //titleView를 렌더링하는 메소드
-    render : function(renderingDom,modelList){
+    render : function(renderingDom){
+        this.createTitleList();
         let newsTitleListTemplate = utility.$selector('#newsTitleListTemplate').innerText;
-        let titleListData = this.getTitleList(modelList);
-
-        newsTitleListTemplate = newsTitleListTemplate.replace("{{newsList}}", titleListData.map(function (val) {
-            return "<li class="+ val.key +">" + val.title + "</li>"
+        newsTitleListTemplate = newsTitleListTemplate.replace("{{newsList}}", this.titleListData.map(function (title,idx) {
+            return "<li class="+ idx +">" + title + "</li>"
         }).join(""));
 
-        let argArr = Array.prototype.slice.call(arguments);
         renderingDom.innerHTML = newsTitleListTemplate;
-
-        let highlight;
-        let key;
-
-        if(argArr[argArr.length-2] !== undefined && argArr[argArr.length-1] !== undefined){
-            highlight = argArr[argArr.length-2];
-            key = argArr[argArr.length-1];
-            highlight(key);
-        }
-
-        argArr.slice(1);
+        // let highlight;
+        // let key;
+        // if(argArr[argArr.length-2] !== undefined && argArr[argArr.length-1] !== undefined){
+        //     highlight = argArr[argArr.length-2];
+        //     key = argArr[argArr.length-1];
+        //     highlight(key);
+        // }
         let listUl = utility.$selector(".titleUl");
         //바인드를 apply사용하는 법
-        listUl.addEventListener("click",this.listClickHandler.bind.apply(this.listClickHandler,[this].concat(argArr.slice(1))));
+        listUl.addEventListener("click",this.listClickHandler.bind(this,this.renderingViews,this.current));
 
-
-    },
-    //title 리스트를 가져오는 메소드
-    getTitleList : function(newsModelList){
-        return newsModelList.selectNewsTitle();
     },
     getTitleListViewKey : function(){
         return this.titleListViewKey;
@@ -47,27 +40,56 @@ var TitleListViewProtoType = {
     setTitleListViewKey : function(titleListViewKey){
         this.titleListViewKey = titleListViewKey;
     },
-    listClickHandler : function (modelList) {
-     let key =  Number(event.target.className);
-     let argArr = Array.prototype.slice.call(arguments);
-        for(let i = 1; i < argArr.length-1; i++){
-            if(Object.prototype.toString.call(argArr[i]) !== "[object Object]"){
-                break;
-            }
-            let viewObj =  argArr[i].viewObj;
-            let domObj = argArr[i].domObj;
-            let handlerFn = argArr[i].handlerFn;
-            viewObj.render(modelList,domObj,key,handlerFn);
-            }
-        if(argArr[argArr.length-2] !== event) {
-            highLight(key);
+    getTitleListData : function(){
+        return this.titleListData;
+    },
+    setTitleListData : function(titleListData){
+        this.titleListData = titleListData;
+    },
+    getRenderingViews : function(){
+        return this.renderingViews;
+    },
+    setRenderingViews : function(renderingViews){
+        this.renderingViews = renderingViews;
+    },
+    getContentsList : function(){
+        return this.contentsList;
+    },
+    setContentsList: function(contentsList){
+        this.contentsList = contentsList;
+    },
+    getCurrent : function(){
+        return this.current;
+    },
+    setCurrent : function(current){
+        this.current = current;
+    },
+    createTitleList : function(){
+        this.titleListData = [];
+        this.contentsList.forEach((val)=>{
+            this.titleListData.push(val.title);
+        });
+    },
+    listClickHandler : function (renderingViews,current) {
+        current =  Number(event.target.className);
+        //let renderingViews = this.renderingViews;
+        for(let i = 0; i < renderingViews.length; i++){
+            // if(Object.prototype.toString.call(renderingViews[i]) !== "[object Object]"){
+            //     break;
+            // }
+
+            let viewObj =  renderingViews[i].viewObj;
+            let domObj = renderingViews[i].domObj;
+            viewObj.setCurrent(current);
+            viewObj.render(domObj);
         }
+        // if(argArr[argArr.length-2] !== event) {
+        //     argArr[argArr.length-2](key);
+        // }
     }
 };
 
 
-var TitleListViewProperty = {
-    titleListViewKey : 0,
-};
 
-var titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
+
+//var titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);

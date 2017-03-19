@@ -8,47 +8,96 @@
 var ContentsViewProtoType = {
 
     //contents를 렌더링하는 메소드
-    render : function(newsModelList,contentsDom,key,eventHandler){
+    render : function(renderingDom){
 
-        var mainTemplate = utility.$selector("#newsTemplate").innerText;
-        let contents = this.getContents(newsModelList,key);
-        if(key===undefined) {
-            contentsDom.innerHTML =  "";
+        let mainTemplate = utility.$selector("#newsTemplate").innerText;
+        this.createContent();
+        let contentData = this.contentData;
+
+        if(contentData===undefined) {
+            renderingDom.innerHTML =  "";
         }else {
-            mainTemplate = mainTemplate.replace("{{newsKey}}", contents.newsKey);
-            mainTemplate = mainTemplate.replace("{{title}}", contents.title);
-            mainTemplate = mainTemplate.replace("{{imgurl}}", contents.imgurl);
-            mainTemplate = mainTemplate.replace("{{newsList}}", contents.newslist.map(function (val) {
+            mainTemplate = mainTemplate.replace("{{newsKey}}", this.current);
+            mainTemplate = mainTemplate.replace("{{title}}", contentData.title);
+            mainTemplate = mainTemplate.replace("{{imgurl}}", contentData.imgurl);
+            mainTemplate = mainTemplate.replace("{{newsList}}", contentData.newslist.map(function (val) {
                 return "<li>" + val + "</li>"
-            }).join(""));
-            
-        contentsDom.innerHTML = mainTemplate;
+        }).join(""));
+
+        renderingDom.innerHTML = mainTemplate;
+
         let buttonDom = utility.$selector("button");
-            buttonDom.addEventListener("click", eventHandler.bind(this,newsModelList));
+        buttonDom.addEventListener("click", this.removeNewsClickHandler.bind(this,this.renderingViews,this.current));
         }
-
-
-    },
-    //title 리스트를 가져오는 메소드
-    getContents : function(newsModelList,key){
-
-        return newsModelList.selectNews(key);
     },
     getContentsViewKey : function(){
         return this.contentsViewKey;
-
     },
     setContentsViewKey : function(contentsViewKey){
         this.contentsViewKey = contentsViewKey;
+    },
+    getContentData : function(){
+        return this.contentData;
+    },
+    setContentData: function(contentData){
+        this.contentData = contentData;
+    },
+    getContentsList : function(){
+        return this.contentsList;
+    },
+    setContentsList: function(contentsList){
+        this.contentsList = contentsList;
+    },
+    getRenderingViews : function(){
+        return this.renderingViews;
+    },
+    setRenderingViews : function(renderingViews){
+        this.renderingViews = renderingViews;
+    },
+    getCurrent : function(){
+        return this.current;
+    },
+    setCurrent : function(current){
+        this.current = current;
+    },
+    createContent : function(){
+        this.contentData = this.contentsList[this.current];
+    },
+    removeContent : function(){
+        this.contentsList.splice(this.current, 1);
+    },
+
+    //구독취소버튼 클릭 핸들러
+    removeNewsClickHandler :  function (renderingViews,current){
+    this.removeContent(current);
+
+    current = 0;
+
+    for (let i = 0; i < renderingViews.length; i++) {
+        // if (Object.prototype.toString.call(renderingViews[i]) !== "[object Object]") {
+        //     break;
+        // }
+        let viewObj = renderingViews[i].viewObj;
+        let domObj = renderingViews[i].domObj;
+        viewObj.setCurrent(current);
+        viewObj.render(domObj);
     }
+
+    }
+
 };
+
 
 
 var ContentsViewProperty = {
     contentsViewKey : 0,
+    contentData: {},
+    contentsList : [],
+    renderingViews : [],
+    current: 0,
 };
 
-var contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
+//var contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
 
 
 

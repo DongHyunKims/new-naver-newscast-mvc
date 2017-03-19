@@ -4,6 +4,8 @@
     //"./data/newslist.json"
 
 
+
+
 (function() {
 
     let titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
@@ -17,26 +19,36 @@
         let jsonDatas = JSON.parse(this.responseText);
         //console.log(jsonDatas);
         let newsListObj = createNewsList(jsonDatas);
+        let contentList = newsListObj.getNewsModelList();
 
+        //렌더링 할 dom
         let headerDom = utility.$selector("header");
-        //렌더링 부분
         let titleListDom = utility.$selector("#titleList");
         let contentDom = utility.$selector("#newsContents");
-        let sideDom = utility.$selector(".sideArea");
-
-        menuView.render(newsListObj,headerDom,0,arrowClickHandler);
-
-        let content = {viewObj : contentsView, domObj: contentDom,handlerFn : removeNewsClickHandler};
-        let menu = {viewObj: menuView,domObj:headerDom, handlerFn: arrowClickHandler};
 
 
-        titleListView.render(titleListDom,newsListObj,content,menu,highLight,0);
+        //let sideDom = utility.$selector(".sideArea");
+
+        let content = {viewObj : contentsView, domObj: contentDom};
+        let menu = {viewObj: menuView, domObj:headerDom};
+        let title = {viewObj: titleListView, domObj: titleListDom};
+
+        menuView.setRenderingViews([content,menu]);
+        menuView.setContentsList(contentList);
+        menuView.setCurrent(0);
+        menuView.render(headerDom);
 
 
-        //titleListView2.render(sideDom,newsListObj,content,menu,highLight,0);
+        titleListView.setRenderingViews([menu,content]);
+        titleListView.setContentsList(contentList);
+        titleListView.setCurrent(0);
+        titleListView.render(titleListDom);
 
+        contentsView.setRenderingViews([content,menu,title]);
+        contentsView.setContentsList(contentList);
+        contentsView.setCurrent(0);
+        contentsView.render(contentDom);
 
-        contentsView.render(newsListObj,contentDom,0,removeNewsClickHandler);
 
 
     }

@@ -11,33 +11,40 @@
 
 
 var MenuViewProperty = {
-
     menuViewKey : 0,
     menuList : ["전체언론사","My news"],
+    contentsList : [],
+    renderingViews : [],
+    current: 0,
+    total: 0
 };
 
 var MenuViewProtoType = {
 
     //menu rendering 메소드
-    render : function(newsModelList,headerDom,key){
+    render : function(renderingDom){
+        this.total = this.contentsList.length;
+        let currentPage = this.total === 0 ? 0 : this.current+1;
+        let mainTemplate = document.querySelector("#newsMenuTemplate").innerText;
 
-        var mainTemplate = document.querySelector("#newsMenuTemplate").innerText;
-        let pages = this.getPage(newsModelList,key);
-
-        mainTemplate = mainTemplate.replace("{{currentPage}}", pages.currentPage);
-        mainTemplate = mainTemplate.replace("{{totalPage}}", pages.totalPage);
+        mainTemplate = mainTemplate.replace("{{currentPage}}", currentPage);
+        mainTemplate = mainTemplate.replace("{{totalPage}}", this.total);
         mainTemplate = mainTemplate.replace("{{menuList}}", this.menuList.map(function (val) {
             return "<li>" + val + "</li>"
         }).join(""));
 
-        headerDom.innerHTML = mainTemplate;
+        renderingDom.innerHTML = mainTemplate;
 
+        // let highlight;
+        // let key;
+        // if(argArr[argArr.length-2] !== undefined && argArr[argArr.length-1] !== undefined){
+        //     highlight = argArr[argArr.length-2];
+        //     key = argArr[argArr.length-1];
+        //     highlight(key);
+        // }
         let arrowBtnDom = document.querySelector(".btn");
-        arrowBtnDom.addEventListener("click", arrowClickHandler.bind(this,newsModelList));
-    },
-    //title 리스트를 가져오는 메소드
-    getPage : function(newsModelList,key){
-        return newsModelList.selectPage(key);
+        arrowBtnDom.addEventListener("click", this.arrowClickHandler.bind(this,this.renderingViews,currentPage, this.total));
+
     },
     getMenuViewKey : function(){
         return this.contentsViewKey;
@@ -48,16 +55,70 @@ var MenuViewProtoType = {
     },
     addMenu : function(menu){
         this.menuList.push(menu);
+    },
+    getPageData : function(){
+        return this.pageData;
+    },
+    setPageData: function(pageData){
+        this.pageData = pageData;
+    },
+    getRenderingViews : function(){
+        return this.renderingViews;
+    },
+    setRenderingViews : function(renderingViews){
+        this.renderingViews = renderingViews;
+    },
+    getContentsList : function(){
+        return this.contentsList;
+    },
+    setContentsList: function(contentsList){
+        this.contentsList = contentsList;
+    },
+    getCurrent : function(){
+        return this.current;
+    },
+    setCurrent : function(current){
+        this.current = current;
+    },
+    getTotal : function(){
+        return this.total;
+    },
+    setTotal: function(total){
+        this.total = total;
+    },
+    //prev,next 버튼 클릭 핸들러
+    arrowClickHandler : function(renderingViews,currentPage,total) {
+        let totalpage = total;
+
+        if (event.target.parentElement.className == "left") {
+            if (currentPage > 1) {
+                currentPage--;
+            } else if (currentPage === 1) {
+                currentPage = totalpage;
+            }
+        } else {
+            if (currentPage < totalpage) {
+                currentPage++;
+            } else if (currentPage === totalpage) {
+                currentPage = 1;
+            }
+        }
+
+        for (let i = 0; i < renderingViews.length; i++) {
+            let viewObj = renderingViews[i].viewObj;
+            let domObj = renderingViews[i].domObj;
+            viewObj.setCurrent(currentPage-1);
+            viewObj.render(domObj);
+        }
+        // if (argArr[argArr.length - 2] !== event) {
+        //     argArr[argArr.length - 2](selectedKey);
+        // }
     }
 
 };
 
 
-var menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
-
-
-
-
+//var menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
 
 
 
