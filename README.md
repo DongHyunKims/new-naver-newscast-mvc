@@ -29,7 +29,3 @@
 ### Variable / Method
 
 ### Useage
-
-
-
-   

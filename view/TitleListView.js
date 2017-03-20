@@ -24,8 +24,12 @@ var TitleListViewProtoType = {
 
         renderingDom.innerHTML = newsTitleListTemplate;
         let listUl = utility.$selector(".titleUl");
-        listUl.addEventListener("click",this.listClickHandler.bind(this,this.renderingViews,this.current));
-        this.highLight();
+
+            listUl.addEventListener("click", this.listClickHandler.bind(this, this.renderingViews, this.current));
+        if(this.contentsList.length !== 0) {
+            this.highLight();
+        }
+
     },
     getTitleListViewKey : function(){
         return this.titleListViewKey;
