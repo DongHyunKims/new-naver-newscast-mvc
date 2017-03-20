@@ -5,7 +5,7 @@
 
 var NewsModelListProperty = {
     newsModelListKey : 0,
-    newsModelList : []
+    newsModelList : [],
 };
 
 var NewsModelListPrototype = {
@@ -35,34 +35,31 @@ var NewsModelListPrototype = {
             }
         }
     },
+
+    cancelSubscribe : function(idx){
+        this.newsModelList.splice(idx, 1);
+        dispatcher.emit({"type":"renderAllViews"},this.createRenderingData(idx));
+
+    },
     //필요한 뉴스 하나만 검색하는 메소드
-    selectNews : function(newsKey) {
-        return this.newsModelList.filter((val)=>{
-            return val.newsKey === newsKey;
-        })[0];
+    selectNews : function(idx) {
+        dispatcher.emit({"type" : "renderAllViews"}, this.createRenderingData(idx));
     },
     //타이틀을 가져 오는 메소드
-    selectNewsTitle : function(){
+    selectNewsTitle : function(idx){
         let titleList = [];
         this.newsModelList.forEach(function(val){
-            titleList.push({key : val.newsKey , title :val.title});
+            titleList.push(val.title);
         });
-        return titleList;
+        return {current : idx , titleList : titleList};
 
     },
     //현재 패이지와 전체페이지를 가져오는 메소드
-    selectPage : function(newsKey){
-        let pageObject = {
-            currentPage : 0,
-            totalPage : this.newsModelList.length
+    selectPage : function(index){
+        return  {
+            currentPage : index+1,
+            totalPage : this.newsModelList.length,
         };
-
-        this.newsModelList.forEach(function(val,idx){
-            if(val.newsKey === newsKey){
-                pageObject.currentPage = idx+1;
-            }
-        });
-        return pageObject;
     },
     //해당 키에 맞는 news의 index를 가져오는 메소드
     getNewsIndex : function(newsKey){
@@ -79,5 +76,24 @@ var NewsModelListPrototype = {
     //인자로 들어온 index에 상응하는 news의 키 값을 가져오는 함수
     getNewsKey : function(index){
         return this.newsModelList[index].getNewsKey();
+    },
+    //newsList를 만드는 함수
+    createModelList : function(jsonDatas){
+        this.newsModelList = jsonDatas.map((val,idx)=>{
+            return utility.makeObject(this.convertObj(val,idx),NewsModelPrototype);
+        });
+        dispatcher.emit({"type" : "renderAllViews"},this.createRenderingData(0));
+    },
+    //json데이터를 class로 바꾸어주는 함수
+    convertObj : function (data,idx){
+        for(let key in data){
+            NewsProperty[key] = data[key]
+        }
+        NewsProperty.newsKey = idx;
+        return utility.makeObject(NewsProperty,NewsModelPrototype);
+    },
+    createRenderingData : function(idx){
+
+        return [{current : idx , modelObj : this.newsModelList[idx]},this.selectPage(idx), this.selectNewsTitle(idx)];
     }
 };

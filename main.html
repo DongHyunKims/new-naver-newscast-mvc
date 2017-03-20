@@ -31,14 +31,14 @@
 
         </section>
     </section>
-        <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                Subscribe <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu" id="subscribeBtn">
-                <li><a href="#"  class="addSubscribe">구독추가</a></li>
-                <li><a href="#"  class="listSubscribe">구독목록</a></li>
-            </ul>
-        </div>
+        <!--<div class="btn-group">-->
+            <!--<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">-->
+                <!--Subscribe <span class="caret"></span></button>-->
+            <!--<ul class="dropdown-menu" role="menu" id="subscribeBtn">-->
+                <!--<li><a href="#"  class="addSubscribe">구독추가</a></li>-->
+                <!--<li><a href="#"  class="listSubscribe">구독목록</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
 </div>
 
 
@@ -54,6 +54,9 @@
 <script src="./view/TitleListView.js"></script>
 <script src="./view/ContentsView.js"></script>
 
+<script src="./controller/Controller.js"></script>
+<script src="./controller/dispatcher.js"></script>
+
 <!--<script src="main.js"></script>-->
 <script src="main_mvc.js"></script>
 
@@ -67,7 +70,8 @@
 <!-- menu template -->
 <script type="template" class="menuTemplate">
     <ul>
-        {{dataList}}
+        <li>전체 언론사</li>
+        <li>My news</li>
     </ul>
     <div class="btn">
         <span class="paging"> {{currentPage}} / {{totalPage}} </span>
