@@ -1,0 +1,103 @@
+[
+	{
+		"press" : "SBS",
+		"imgurl" : "http://img.sbs.co.kr/s9/common/sbs_news_logo.gif?_1",
+		"newslist" : [
+				"[가보니] 가상 경주도 즐기고, 내 손으로 자동차도 만들고",
+				"리캡차'가 사라진다",
+				"갤럭시S8' 출시? '갤노트7' 처리 계획부터 밝혀야",
+				"블로코-삼성SDS, 블록체인 사업 '맞손",
+				"[블록체인 톺아보기] 퍼블릭 블록체인의 한계와 프라이빗 블록체인"
+		],
+		"pressimgurl" :  "http://atc772.cafe24.com/smartEditor/se/upload/48220dc01693c0135ae3eb767c9435d3/21212.jpg"
+	},
+	{
+		"press" : "MBC",
+		"imgurl" : "http://img.imnews.imbc.com/images/2015/MBCNEWS_logo.png",
+		"newslist" : [
+				"발등 찍은 사드보복···제주 중국인들 일자리 잃을 판",
+				"안희정, 당원이 바닥에 집어던진 계란 닦은 이유는",
+				"홍준표, 서문시장서 대선 출마 선언···상인들 반응은",
+				"박근혜 '골목 성명'과 전두환 '골목 성명'은 닮았다"
+		],
+		"pressimgurl" :  "http://i.huffpost.com/gen/1791758/images/o-MBC-facebook.jpg"
+	},
+	{
+		"press" : "KBS",
+		"imgurl" : "http://news.kbs.co.kr/resources/images/kbsnews_logo.png",
+		"newslist" : [
+				"파산 내몰린 의정부경전철, 탐욕에는 제동장치가 없었다",
+				"親朴불복 논란에 경선룰 갈등… 한국당 또 쪼개지나",
+				"415㎞ '연비괴물'투산ix 수소차, 3만원에 창원~서울 달리고도..",
+				"'골드컬러' 갤S8도 출시? 6가지 색상 전면케이스 모습이.."
+		],
+		"pressimgurl" :  "http://vignette1.wikia.nocookie.net/logopedia/images/9/9f/442583-kbs.png/revision/latest?cb=20120610102426"
+	},
+	{
+		"press" : "JTBC",
+		"imgurl" : "http://cfile8.uf.tistory.com/image/24052D50579273DD14B8EE",
+		"newslist" : [
+				"안철수, 당 중재안 수용불가…이러다 정말 또 철수?",
+				"금융권 올해 채용 규모 또 줄인다…대졸 취업자 갈 곳 잃어",
+				"G6 출시로 스마트폰 유통 시장 모처럼 활짝",
+				"대용량 인공지능 플랫폼을 개발자들에게"
+		],
+		"pressimgurl" :  "http://mblogthumb4.phinf.naver.net/20160716_195/hoseoblog_14686423332429LY5I_JPEG/sdfsdfsd.jpg?type=w2"
+	},
+	{
+		"press" : "ChannelA",
+		"imgurl" : "http://blog.donga.com/channel-a/files/2011/09/13182566751315456673.jpg",
+		"newslist" : [
+				"'사드 반대' DJ·盧 인사, 현직 장관 심판 요구 논란",
+				"'가자! 애국보수여' 김진태, 문재인에 大權 도전장",
+				"폭행-성인 방송 출연, 그리고 장시호..김동성의 추락",
+				"유명 프로야구 선수, 캠프지에서 불륜 발각 망신살"
+		],
+		"pressimgurl" :  "http://dongne.donga.com/wp-content/uploads/2011/05/%EC%B1%84%EB%84%90A2.jpg"
+	},
+	{
+		"press" : "NEWSIS",
+		"imgurl" : "http://img.yonhapnews.co.kr/photo/cms/2015/09/23/01/C0A8CA3D0000014FF978C19000006144_P2.jpeg",
+		"newslist" : [
+			"[가보니] 가상 경주도 즐기고, 내 손으로 자동차도 만들고",
+			"리캡차'가 사라진다",
+			"갤럭시S8' 출시? '갤노트7' 처리 계획부터 밝혀야",
+			"블로코-삼성SDS, 블록체인 사업 '맞손",
+			"[블록체인 톺아보기] 퍼블릭 블록체인의 한계와 프라이빗 블록체인"
+		],
+		"pressimgurl" :  "http://img.yonhapnews.co.kr/photo/cms/2015/09/23/01/C0A8CA3D0000014FF978C19000006144_P2.jpeg"
+	},
+	{
+		"press" : "REUTERS",
+		"imgurl" : "https://www.reuters.tv/about/img/press/Reuters%20TV%20logo%20vertical.png",
+		"newslist" : [
+			"발등 찍은 사드보복···제주 중국인들 일자리 잃을 판",
+			"안희정, 당원이 바닥에 집어던진 계란 닦은 이유는",
+			"홍준표, 서문시장서 대선 출마 선언···상인들 반응은",
+			"박근혜 '골목 성명'과 전두환 '골목 성명'은 닮았다"
+		],
+		"pressimgurl" :  "http://talkingbiznews.com/wp-content/uploads/2014/10/Reuters-Logo.jpg"
+	},
+	{
+		"press" : "JIJI.COM",
+		"imgurl" : "http://www.jiji.com/img/sns-logo.jpg",
+		"newslist" : [
+			"파산 내몰린 의정부경전철, 탐욕에는 제동장치가 없었다",
+			"親朴불복 논란에 경선룰 갈등… 한국당 또 쪼개지나",
+			"415㎞ '연비괴물'투산ix 수소차, 3만원에 창원~서울 달리고도..",
+			"'골드컬러' 갤S8도 출시? 6가지 색상 전면케이스 모습이.."
+		],
+		"pressimgurl" :  "http://cdn-ak.b.st-hatena.com/entryimage/318557663-origin-1485778475.jpg"
+	},
+	{
+		"press" : "스포츠동아",
+		"imgurl" : "https://kmug.co.kr/board/data/logo/%BD%BA%C6%F7%C3%F7%B5%BF%BE%C6.jpg",
+		"newslist" : [
+			"안철수, 당 중재안 수용불가…이러다 정말 또 철수?",
+			"금융권 올해 채용 규모 또 줄인다…대졸 취업자 갈 곳 잃어",
+			"G6 출시로 스마트폰 유통 시장 모처럼 활짝",
+			"대용량 인공지능 플랫폼을 개발자들에게"
+		],
+		"pressimgurl" :  "http://web.donga.com/damg/ci.php?file=sportsdonga.jpg"
+	}
+]

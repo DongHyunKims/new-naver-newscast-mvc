@@ -1,0 +1,25 @@
+{
+  "name": "new-naver-newsstand-node",
+  "version": "1.0.0",
+  "description": "## develop_news_stand_node의 목적 - node.js와 mongodb를 사용하여 리펙토링 한다 - 구독 기능추가",
+  "main": "main_mvc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DongHyunKims/new-naver-newscast-mvc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DongHyunKims/new-naver-newscast-mvc/issues"
+  },
+  "homepage": "https://github.com/DongHyunKims/new-naver-newscast-mvc#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.1"
+  }
+}
