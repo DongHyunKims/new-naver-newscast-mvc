@@ -20,7 +20,7 @@
             <li>My news</li>
         </ul>
         <div class="btn">
-            <span class="paging"> <%=currentPage%> / <%=totalPage%> </span>
+            <span class="paging"> <%=page.currentPage%> / <%=page.totalPage%> </span>
             <div class="left"><a href="#"><</a></div>
             <div class="right"><a href="#">></a></div>
         </div>
@@ -28,26 +28,26 @@
 
     <section class="mainArea" id="mainArea">
         <div id="titleList">
-
-        </div>
-
-        <section class="content" id="newsContents">
             <nav class="titleListNav">
                 <ul class="titleUl">
-                    <%titleList.forEach((val)=>{%>
+                    <%pressList.forEach((val)=>{%>
                     <li><%=val%></li>
                     <%})%>
                 </ul>
             </nav>
+        </div>
+
+        <section class="content" id="newsContents">
+
 
             <h4 class="title">
-                <hidden class=<%=key%>></hidden>
-                <span class="newsName"><%=title%></span> <button><a href="#">X</a></button>
+                <hidden class=<%=newsData._id%>></hidden>
+                <span class="newsName"><%=newsData.press%></span> <button><a href="#">X</a></button>
             </h4>
             <div class="newsList">
-                <img src="<%=imgurl%>" alt="">
+                <img src="<%=newsData.imgurl%>" alt="">
                 <ul>
-                    <%newsList.forEach(function(val){%>
+                    <%newsData.newslist.forEach(function(val){%>
                         <li><%=val%></li>
                     <%})%>
                 </ul>

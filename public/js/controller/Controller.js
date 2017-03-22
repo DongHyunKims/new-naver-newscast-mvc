@@ -1,24 +1,32 @@
 /**
  * Created by donghyunkim on 2017. 3. 20..
  */
+
+
+var dispatcher = require("./dispatcher");
 var ControllerPrototype = {
     join: function(){
         // 이벤트 핸들러를 모두 등록 시킨다
         dispatcher.register({
-                "initViews" : function(data){
-                    this.modelList.createModelList(data);
+                "initAllData" : function(res,idx){
+                    this.modelList.initNewsModelList(res,idx);
                 }.bind(this),
-                "renderAllViews" : function(modelObj, page, titleList){
-                    this.menuView.render(page);
-                    this.titleListView.render(titleList);
-                    this.contentsView.render(modelObj);
+                "getOneDataIdx" : function(idx){
+                    return this.modelList.getOneModelByIdx(idx);
                 }.bind(this),
-                "clickEvent" : function(current){
-                    this.modelList.selectNews(current);
+                "getAllData" : function(){
+                    return this.modelList.getAllData();
                 }.bind(this),
-                "cancelClickEvent" : function(current){
-                    this.modelList.cancelSubscribe(current);
+                "getTitleList" : function () {
+                    return this.modelList.getTitleList();
                 }.bind(this),
+                "getPageByIdx" : function(idx){
+                    return this.modelList.getPageByIdx(idx);
+                }.bind(this),
+                "renderPage" : function(res,renderingData){
+                    res.render("main",renderingData);
+                }
+
         });
     }
 };

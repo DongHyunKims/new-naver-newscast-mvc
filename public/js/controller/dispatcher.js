@@ -7,6 +7,10 @@ const dispatcher = {
     },
     emit : function(typeObj, data){
         //이벤트 핸들러의 내용을 가져와 apply를 통해 배열로 된 인자를 넣고 실행 시킨다
-        this.eventHandlerList[typeObj.type].apply(null,data);
+        console.log(this.eventHandlerList[typeObj.type]);
+        //console.log(typeObj);
+        return this.eventHandlerList[typeObj.type].apply(null,data);
     }
 };
+
+module.exports = dispatcher;

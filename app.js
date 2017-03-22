@@ -6,9 +6,13 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var fs = require("fs");
-var controller = require("./public/js/controller/Controller");
 var dispatcher = require("./public/js/controller/dispatcher");
-var modelList = require("./public/js/model/NewsModelList");
+//var utility = require("./public/js/utility/utility");
+var setInitial = require("./public/js/init");
+
+
+
+
 
 
 var NewsData = require("./models/newsDatas");
@@ -47,16 +51,20 @@ app.listen(3000, (req,res)=>{
 //전체 뉴스 데이터를 받아 오는 라우팅.
 app.get('/', (req,res)=>{
 
-    NewsData.find({},(err,newsData)=>{
+    setInitial();
 
-        if(err) return res.status(500).send(err);
-        if(!newsData.length) return res,status(404).send({err : "newsData not found"});
 
-        //console.log(newsData);
+    dispatcher.emit({type : "initAllData"},[res,0]);
 
-        //res.render("main.ejs",)
 
-    });
+
+    // var promise = dispatcher.emit({type : "initAllData"},[]);
+    // let newsData = dispatcher.emit({type : "getOneDataIdx"},[0]);
+    // let titleList = dispatcher.emit({type : "getTitleList"},[0]);
+    // let page = dispatcher.emit({type : "getPageByIdx"},[0]);
+    // console.log(newsData);
+
+//
 
     //res.render("main.ejs");
 });
