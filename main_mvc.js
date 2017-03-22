@@ -4,52 +4,53 @@
     //"./data/newslist.json"
 
 
+
+
 (function() {
+    //let contentsSubscribeView = utility.makeObject(ContentsSubscribeViewPrototype,ContentsSubscribeViewProperty);
 
-    //ajax 콜백함수
-    function reqListener() {
 
-        let jsonDatas = JSON.parse(this.responseText);
-        //console.log(jsonDatas);
-        let newsListObj = createNewsList(jsonDatas);
 
+    const titleListView = utility.makeObject(TitleListViewProperty,TitleListViewProtoType);
+    const menuView = utility.makeObject(MenuViewProperty,MenuViewProtoType);
+    const contentsView = utility.makeObject(ContentsViewProperty,ContentsViewProtoType);
+
+    //sevice runner
+    document.addEventListener("DOMContentLoaded", function() {
         let headerDom = utility.$selector("header");
-        //렌더링 부분
         let titleListDom = utility.$selector("#titleList");
         let contentDom = utility.$selector("#newsContents");
 
-        menuView.renderMenu(newsListObj,headerDom,0,arrowClickHandler);
-        titleListView.renderTitleList(newsListObj,titleListDom,listClickHandler,highLight,0);
-        contentsView.renderContents(newsListObj,contentDom,0,removeNewsClickHandler);
+        titleListView.setRenderingDom(titleListDom);
+        menuView.setRenderingDom(headerDom);
+        contentsView.setRenderingDom(contentDom);
 
-    }
-
-
+        let modelList = utility.makeObject(NewsModelListProperty,NewsModelListPrototype);
 
 
-    //newsList를 만드는 함수
-    function createNewsList(jsonDatas){
-
-        NewsModelListProperty.newsModelList = jsonDatas.map(function(val,idx){
-            return utility.makeObject(convertNewsObj(val,idx),NewsModelPrototype);
+        const controller = Object.assign(Object.create(ControllerPrototype),{
+            modelList : modelList,
+            titleListView : titleListView,
+            menuView : menuView,
+            contentsView : contentsView,
         });
-        return utility.makeObject(NewsModelListProperty,NewsModelListPrototype);
+
+
+        controller.join();
+
+
+    });
+
+
+    //ajax 콜백함수
+    function reqListener() {
+        let jsonDatas = JSON.parse(this.responseText);
+        dispatcher.emit({"type": "initViews"},[jsonDatas]);
+
+        //titleListView.setEvent();
+        //menuView.setEvent();
+        //contentsView.setEvent();
     }
-
-    //json데이터를 class로 바꾸어주는 함수
-    function convertNewsObj(data,idx){
-
-        for(let key in data){
-            NewsProperty[key] = data[key]
-        }
-
-        NewsProperty.newsKey = idx;
-        return utility.makeObject(NewsProperty,NewsModelPrototype);
-
-    }
-
-
-
 
     document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET","./data/newslist.json"));
 
