@@ -3,12 +3,12 @@
  */
 
 var NewsProperty = {
-    newsKey : 0,
-    title : "",
+    _id : 0,
+    press : "",
     newslist : [],
     imgurl : "",
-    subState : 0,
-    titleimgurl : "",
+    state : 0,
+    pressimgurl : "",
 };
 
 
@@ -16,8 +16,8 @@ var NewsModelPrototype = {
     getNewsKey : function(){
         return this.newsKey;
     },
-    getTitle : function(){
-        return this.title;
+    getPress : function(){
+        return this.press;
     },
     getNewsList : function(){
         return this.newslist;
@@ -26,16 +26,16 @@ var NewsModelPrototype = {
         return this.imgurl;
     },
     getSubState : function(){
-        return this.subState;
+        return this.state;
     },
-    getTitleImgurl : function(){
-        return this.titleimgurl;
+    getPressImgurl : function(){
+        return this.pressimgurl;
     },
     setNewsKey : function(newsKey){
         this.newsKey = newsKey;
     },
-    setTitle : function(title){
-        this.title = title;
+    setPress : function(title){
+        this.press = press;
     },
     setNewsList : function(newslist){
         this.newslist = newslist;
@@ -43,11 +43,11 @@ var NewsModelPrototype = {
     setImgurl : function(imgurl){
         this.imgurl = imgurl;
     },
-    setSubState : function(subState){
+    setState : function(subState){
         this.subState = subState;
     },
-    setTitleImgurl : function(titleimgurl){
-        this.titleimgurl = titleimgurl;
+    setPressImgurl : function(pressimgurl){
+        this.pressimgurl = pressimgurl;
     },
 
 };

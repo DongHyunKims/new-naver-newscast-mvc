@@ -10,6 +10,7 @@ var utility = {
         },
         //ajax 실행 메소드
         runAjax : function(reqListener, method, url){
+
             var oReq = new XMLHttpRequest();
             //reqListener 제일 마지막에 실행된다.
             oReq.addEventListener("load", reqListener);
@@ -25,5 +26,6 @@ var utility = {
                 obj[val] = property[val];
             });
             return obj;
-        }
+        },
+        defaultUrl : "http://localhost:3000",
     };

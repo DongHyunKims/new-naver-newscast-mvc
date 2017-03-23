@@ -6,15 +6,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var fs = require("fs");
-var dispatcher = require("./public/js/controller/dispatcher");
-//var utility = require("./public/js/utility/utility");
-var setInitial = require("./public/js/init");
-
-
-
-
-
-
+var _ = require("underscore");
+var ejs = require('ejs');
+var path = require('path');
 var NewsData = require("./models/newsDatas");
 
 var app = express();
@@ -48,38 +42,92 @@ app.listen(3000, (req,res)=>{
  console.log("3000 PORT OPENED!!");
 });
 
-//전체 뉴스 데이터를 받아 오는 라우팅.
-app.get('/', (req,res)=>{
-
-    setInitial();
-
-
-    dispatcher.emit({type : "initAllData"},[res,0]);
 
 
 
-    // var promise = dispatcher.emit({type : "initAllData"},[]);
-    // let newsData = dispatcher.emit({type : "getOneDataIdx"},[0]);
-    // let titleList = dispatcher.emit({type : "getTitleList"},[0]);
-    // let page = dispatcher.emit({type : "getPageByIdx"},[0]);
-    // console.log(newsData);
+app.get('/',(req,res)=>{
+    NewsData.find({}).exec((err,newsDatas)=>{
+        if(err) console.log(err);
+        else if(!newsDatas.length) console.log("not found");
+        else {
 
-//
 
-    //res.render("main.ejs");
+            let pressList = getAllPress(newsDatas);
+
+            //console.log(pressList);
+            res.render("subscribeMain",{newsData: pressList});
+        }
+    });
 });
 
 
+function getAllPress(newsDatas){
+    let preeList = [];
+    _.forEach(newsDatas,(val)=>{
+        preeList.push({_id : val._id, pressimgurl : val.pressimgurl , state: val.state});
+    });
+    return preeList;
+}
+
+
+
+
+
+//전체 뉴스 데이터를 받아 오는 라우팅.
+app.get('/main', (req,res)=>{
+
+    res.sendFile(__dirname + "/public/main.html");
+
+});
+
+
+
+app.get('/data',(req,res)=>{
+    NewsData.find({state:1}).exec((err,newsDatas)=>{
+        if(err) console.log(err);
+
+
+        else if(!newsDatas.length)  res.json([{_id : 0, press:"구독된 뉴스 없음", imgurl : "http://english.tw/wp-content/themes/qaengine/img/default-thumbnail.jpg", newslist : ["구독된 뉴스 없음"] , pressimgurl : "http://www.ecolab.com/Areas/EcolabSite/img/catalog-default-img.gif", state : 0}]);
+        else {
+            res.json(newsDatas);
+        }
+    });
+});
+
+
+app.get('/updateSubState/:id',(req,res)=>{
+
+
+
+    let keyState = req.params.id.split("_");
+    let _id = keyState[0];
+    let subState = Number(keyState[1]);
+    let toggle = 0;
+
+
+    if(subState === 1){
+        toggle = 0;
+    }else{
+        toggle = 1;
+    }
+
+    NewsData.findOneAndUpdate({_id : _id},{state : toggle},(err,newsData)=>{
+
+        if(err) return res.status(500).send(err);
+        if(!newsData) return res.status(404).send({ err: "User not found" });
+
+        res.json(newsData);
+
+    });
+});
 
 
 //자동 생성
 app.get('/auto_insert',(req,res)=>{
     fs.readFile('./public/data/newslist.json','utf8',(err, data)=>{
         if (err) throw err;
-        //console.log(data);
         let jsonData = [];
         jsonData = JSON.parse(data);
-        //console.log(jsonData[0]);
         jsonData.forEach((val)=>{
             val.state = 0;
             console.log(val);

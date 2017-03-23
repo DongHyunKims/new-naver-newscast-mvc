@@ -91,16 +91,11 @@ nav {
     height: 150px;
 }
 
-.newsList ul li {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 12px;
-}
-#mainArea{
-    border: 1px solid #cccaca;
+#subTable{
+    text-align: center;
 }
 
-#mainArea .row .row .col-sm-3{
-    border: 1px solid #cccaca;
-    text-align: center;
+
+.pressImgDiv{
+    border: 4px solid black;
 }

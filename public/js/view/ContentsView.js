@@ -18,8 +18,8 @@ var ContentsViewProtoType = {
         if(contentData===undefined) {
             renderingDom.innerHTML =  "";
         }else {
-            mainTemplate = mainTemplate.replace("{{idx}}", current);
-            mainTemplate = mainTemplate.replace("{{title}}", contentObj.title);
+            mainTemplate = mainTemplate.replace("{{idx}}","i"+ contentObj._id  +"_"+contentObj.state);
+            mainTemplate = mainTemplate.replace("{{press}}", contentObj.press);
             mainTemplate = mainTemplate.replace("{{imgurl}}", contentObj.imgurl);
             mainTemplate = mainTemplate.replace("{{dataList}}", contentObj.newslist.map(function (val) {
                 return "<li>" + val + "</li>"
@@ -45,13 +45,16 @@ var ContentsViewProtoType = {
     },
     //구독취소 핸들러
     cancelClickHandler :  function (){
-        let current = Number(utility.$selector("hidden").className);
+        let keyState = utility.$selector("hidden").id.slice(1);
         let btnDom = utility.$selector("button");
         btnDom.addEventListener("click",function () {
-            dispatcher.emit({"type":"cancelClickEvent"}, [current]);
+            dispatcher.emit({"type":"cancelClickEvent"}, [ function(){
+                location.reload();
+            },keyState]);
         });
 
-    }
+    },
+
 };
 
 var ContentsViewProperty = {

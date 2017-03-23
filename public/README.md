@@ -1,8 +1,4 @@
-## mvc 패턴과 observer패턴 nodes js 적용 news stand
-
-## develop_news_stand_node의 목적
-- node.js와 mongodb를 사용하여 리펙토링 한다
-- 구독 기능추가
+## mvc 패턴 적용 newscast
 
 ## 추가사항
 - controller 구현
@@ -15,13 +11,6 @@
 - 클레스 다이어그램 및 데이터 흐름도 작성.
 - ver 1.0 부터 현재 까지의 수정 사항 및 어려웟던 부분 블로그 정리
 - observer 패턴을 사용하여 리펙토링 한다
-- node.js와 mongodb를 사용하여 리펙토링 한다
--
-
-
-
-
-
 
 ## News Stand view API
 
@@ -37,7 +26,6 @@
  - News stand의 좌측 title list를 렌더링 하는 객체.
 4. ContentsSubscribeView
  - 구독할 데이터의 정보를 렌더링하는 객체.
-
 
 ### Variable / Method
 

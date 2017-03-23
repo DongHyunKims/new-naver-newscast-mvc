@@ -54,11 +54,13 @@
 <script src="js/view/TitleListView.js"></script>
 <script src="js/view/ContentsView.js"></script>
 
+
+
 <script src="js/controller/Controller.js"></script>
 <script src="js/controller/dispatcher.js"></script>
 
 <!--<script src="main.js"></script>-->
-<script src="js/init.js"></script>
+<script src="js/main_mvc.js"></script>
 
 
 
@@ -70,8 +72,8 @@
 <!-- menu template -->
 <script type="template" class="menuTemplate">
     <ul>
-        <li>전체 언론사</li>
-        <li>My news</li>
+        <li><a href="/">전체 언론사</a></li>
+        <li><a href="/main">My news</a></li>
     </ul>
     <div class="btn">
         <span class="paging"> {{currentPage}} / {{totalPage}} </span>
@@ -93,8 +95,8 @@
 
 <script type="template" class="contentTemplate">
     <h4 class="title">
-        <hidden class={{idx}}></hidden>
-        <span class="newsName">{{title}}</span> <button><a href="#">X</a></button>
+        <hidden id={{idx}}></hidden>
+        <span class="newsName">{{press}}</span> <button><a href="">X</a></button>
     </h4>
     <div class="newsList">
         <img src={{imgurl}} alt="">
@@ -110,7 +112,6 @@
         {{subscribeList}}
     </div>
 </script>
-
 
 
 
