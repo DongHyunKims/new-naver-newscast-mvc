@@ -19,12 +19,12 @@ router.use("/newsData",newsData);
 
 //구독 페이지 (메인 페이지) 라우팅
 router.get('/',(req,res)=>{
-
     NewsDataModel.find({}).exec((err,newsDatas)=>{
         if(err) console.log(err);
         else if(!newsDatas.length) console.log("not found");
         else {
             let pressList = getAllPress(newsDatas);
+            //서버에서 직접 렌더링
             res.render( path.join(__dirname ,"../views/subscribeMain"),{newsData: pressList});
         }
     });
@@ -41,6 +41,7 @@ function getAllPress(newsDatas){
 }
 
 router.get('/main', (req,res)=>{
+    //정적인 페이지 렌더링
     res.sendFile(path.join(__dirname , "../public/main.html"));
 });
 
