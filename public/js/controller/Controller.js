@@ -18,7 +18,7 @@ var ControllerPrototype = {
                     this.modelList.selectNews(current);
                 }.bind(this),
                 "cancelClickEvent" : function(reqListener,id){
-                    utility.runAjax(reqListener,'get',utility.defaultUrl+"/newsData/updateSubState/" + id);
+                    utility.runAjax(reqListener,'get',utility.defaultUrl+ "/newsData/updateSubState/" + id);
                 }
 
         });

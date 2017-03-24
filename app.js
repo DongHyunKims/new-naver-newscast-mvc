@@ -9,13 +9,19 @@ var router = require("./router/index");
 var app = express();
 
 
+var dbConnection = require("./models/dbConnection");
+
+
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public/data"));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.set("view engine","ejs");
-
 app.use(router);
+
+
+dbConnection();
 
 
 app.listen(3000, (req,res)=>{
