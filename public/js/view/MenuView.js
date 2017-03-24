@@ -45,8 +45,6 @@ var MenuViewProtoType = {
         this.arrowClickHandler();
     },
     //prev,next 버튼 클릭 핸들러
-
-
     arrowClickHandler : function() {
         let pageData = utility.$selector(".paging").innerText.split(" ");
         let currentPage = Number(pageData[0]);

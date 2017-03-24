@@ -11,7 +11,6 @@ var NewsProperty = {
     pressimgurl : "",
 };
 
-
 var NewsModelPrototype = {
     getNewsKey : function(){
         return this.newsKey;

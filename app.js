@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.set("view engine","ejs");
 app.use(router);
 
-
+//데이터 연결 부분
 dbConnection();
 
 

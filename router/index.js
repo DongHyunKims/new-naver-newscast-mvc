@@ -17,6 +17,7 @@ var newsData = require("./newsData/newsData");
 
 router.use("/newsData",newsData);
 
+//구독 페이지 (메인 페이지) 라우팅
 router.get('/',(req,res)=>{
 
     NewsDataModel.find({}).exec((err,newsDatas)=>{
@@ -30,6 +31,7 @@ router.get('/',(req,res)=>{
 });
 
 
+//모든 press 이름 가져오는 함수
 function getAllPress(newsDatas){
     let preeList = [];
     _.forEach(newsDatas,(val)=>{
@@ -42,7 +44,7 @@ router.get('/main', (req,res)=>{
     res.sendFile(path.join(__dirname , "../public/main.html"));
 });
 
-//자동 생성
+//json 데이터를 기반으로 자동으로 데이터 생성하는 라우팅
 router.get('/auto_insert',(req,res)=>{
     fs.readFile('../public/data/newslist.json','utf8',(err, data)=>{
         if (err) throw err;

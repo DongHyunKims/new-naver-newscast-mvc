@@ -8,7 +8,7 @@ var router = express.Router();
 var NewsDataModel = require("../../models/newsDatas");
 
 
-
+//구독된 뉴스만 가져오는 라우팅
 router.get('/getNews',(req,res)=>{
     NewsDataModel.find({state:1}).exec((err,newsDatas)=>{
         if(err) console.log(err);
@@ -19,7 +19,7 @@ router.get('/getNews',(req,res)=>{
     });
 });
 
-
+// 구독 상태를 업데이트하는 라우팅
 router.get('/updateSubState/:id',(req,res)=>{
 
     let keyState = req.params.id.split("_");
