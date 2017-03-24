@@ -48,7 +48,7 @@
         dispatcher.emit({"type": "initViews"},[jsonDatas]);
 
     }
-    document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET",utility.defaultUrl + "/data"));
+    document.addEventListener("DOMContentLoaded",utility.runAjax(reqListener,"GET",utility.defaultUrl + "/newsData/getNews"));
 
 })();
 
